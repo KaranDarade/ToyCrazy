@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { prisma } from '@toycraze/database';
 
-export const orderRoutes = Router();
+export const orderRoutes: Router = Router();
 
 // GET /api/orders — List user's orders
 orderRoutes.get('/', async (req: Request, res: Response) => {
@@ -82,8 +82,8 @@ orderRoutes.post('/', async (req: Request, res: Response) => {
     );
 
     res.status(201).json({ success: true, data: order });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error creating order:', error);
-    res.status(400).json({ success: false, error: error.message || 'Failed to create order' });
+    res.status(400).json({ success: false, error: error instanceof Error ? error.message : 'Failed to create order' });
   }
 });

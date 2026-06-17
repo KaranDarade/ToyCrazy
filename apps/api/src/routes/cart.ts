@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { prisma } from '@toycraze/database';
 
-export const cartRoutes = Router();
+export const cartRoutes: Router = Router();
 
 // GET /api/cart — Get user's cart
 cartRoutes.get('/', async (req: Request, res: Response) => {
@@ -16,8 +16,8 @@ cartRoutes.get('/', async (req: Request, res: Response) => {
       include: { product: true },
     });
 
-    const totalAmount = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
-    const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+    const totalAmount = items.reduce((sum: number, item: { quantity: number; product: { price: number } }) => sum + item.product.price * item.quantity, 0);
+    const itemCount = items.reduce((sum: number, item: { quantity: number }) => sum + item.quantity, 0);
 
     res.json({
       success: true,

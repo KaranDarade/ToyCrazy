@@ -14,6 +14,7 @@
     "test": "turbo run test",
     "clean": "turbo run clean",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,css,md}\"",
+    "postinstall": "pnpm db:generate",
     "db:generate": "pnpm --filter @toycraze/database db:generate",
     "db:push": "pnpm --filter @toycraze/database db:push",
     "db:seed": "pnpm --filter @toycraze/database db:seed",

@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { prisma } from '@toycraze/database';
 
-export const productRoutes = Router();
+export const productRoutes: Router = Router();
 
 // GET /api/products — List products with filtering, sorting, pagination
 productRoutes.get('/', async (req: Request, res: Response) => {
