@@ -6,5 +6,5 @@
     "module": "CommonJS",
     "moduleResolution": "node"
   },
-  "include": ["src", "prisma"]
+  "include": ["src"]
 }
