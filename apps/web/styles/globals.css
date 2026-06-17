@@ -1,0 +1,249 @@
+/* ============================================================
+   ToyCraze — Global Styles (Crayon Kingdom Theme)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700&family=Boogaloo&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-paper font-body text-ink;
+    background-image:
+      radial-gradient(circle, #e8e0d4 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+    letter-spacing: 0.02em;
+  }
+
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
+  h2 { @apply text-3xl md:text-4xl; }
+
+  /* Hand-drawn heading tilt */
+  h1.wobbly, h2.wobbly {
+    transform: rotate(-1deg);
+  }
+
+  /* Price styling */
+  .price {
+    @apply font-number text-2xl;
+    transform: rotate(-0.5deg);
+  }
+
+  .price-sale {
+    @apply text-crayon-red;
+  }
+
+  .price-original {
+    @apply text-gray-400 line-through text-lg;
+  }
+}
+
+/* ── Utilities ───────────────────────────────────────────── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .hand-drawn-border {
+    position: relative;
+  }
+
+  .hand-drawn-border::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 3px solid #2D2D2D;
+    border-radius: 20px 8px 20px 8px / 8px 20px 8px 20px;
+    pointer-events: none;
+  }
+
+  .clip-wave-bottom {
+    clip-path: polygon(
+      0% 0%, 100% 0%, 100% 85%,
+      97% 82%, 93% 85%, 89% 81%, 85% 84%,
+      81% 80%, 77% 83%, 73% 79%, 69% 82%,
+      65% 78%, 61% 81%, 57% 77%, 53% 80%,
+      49% 76%, 45% 79%, 41% 75%, 37% 78%,
+      33% 74%, 29% 77%, 25% 73%, 21% 76%,
+      17% 72%, 13% 75%, 9% 71%, 5% 74%,
+      0% 70%, 0% 100%
+    );
+  }
+
+  .clip-wave-top {
+    clip-path: polygon(
+      0% 100%, 100% 100%, 100% 15%,
+      97% 18%, 93% 15%, 89% 19%, 85% 16%,
+      81% 20%, 77% 17%, 73% 21%, 69% 18%,
+      65% 22%, 61% 19%, 57% 23%, 53% 20%,
+      49% 24%, 45% 21%, 41% 25%, 37% 22%,
+      33% 26%, 29% 23%, 25% 27%, 21% 24%,
+      17% 28%, 13% 25%, 9% 29%, 5% 26%,
+      0% 30%, 0% 0%
+    );
+  }
+
+  /* Crayon texture effect */
+  .crayon-fill {
+    position: relative;
+  }
+
+  .crayon-fill::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+}
+
+/* ── Button Base ─────────────────────────────────────────── */
+@layer components {
+  .btn-crayon {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full
+           font-display text-lg text-white
+           bg-crayon-red border-3 border-ink
+           transition-all duration-200 ease-out
+           hover:scale-95 active:scale-90
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-crayon-yellow
+           focus-visible:ring-offset-2 focus-visible:ring-offset-paper;
+    box-shadow: 3px 4px 0px #2D2D2D;
+  }
+
+  .btn-crayon:active {
+    box-shadow: 1px 2px 0px #2D2D2D;
+    transform: translate(2px, 2px);
+  }
+
+  .btn-crayon-secondary {
+    @apply btn-crayon;
+    @apply bg-crayon-blue;
+  }
+
+  .btn-crayon-green {
+    @apply btn-crayon;
+    @apply bg-crayon-green;
+  }
+
+  .btn-crayon-ghost {
+    @apply btn-crayon;
+    @apply bg-transparent text-ink border-ink;
+    box-shadow: 3px 4px 0px #2D2D2D;
+  }
+
+  .sticker {
+    position: relative;
+    transform: rotate(var(--rot, 0deg));
+  }
+
+  .sticker::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border: 2.5px dashed rgba(45, 45, 45, 0.3);
+    border-radius: 16px 8px 16px 8px;
+    pointer-events: none;
+  }
+
+  .crayon-underline {
+    position: relative;
+    display: inline-block;
+  }
+
+  .crayon-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: repeating-linear-gradient(
+      90deg,
+      #FF6B6B 0px, #FF6B6B 8px,
+      transparent 8px, transparent 12px
+    );
+    border-radius: 2px;
+  }
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-paper;
+  border: 2px solid #2D2D2D;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-crayon-yellow border-2 border-ink rounded-full;
+}
+
+/* ── Animations – Respect Motion Preferences ─────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ── Dot Grid Background ─────────────────────────────────── */
+.bg-dots {
+  background-image: radial-gradient(circle, #d4cbbf 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.bg-lines {
+  background-image: repeating-linear-gradient(
+    transparent, transparent 27px, #e0d8cc 27px, #e0d8cc 28px
+  );
+  background-size: 100% 28px;
+}
+
+/* ── Focus Ring ──────────────────────────────────────────── */
+.wavy-focus:focus-visible {
+  outline: 3px solid #FFD93D;
+  outline-offset: 3px;
+  border-radius: 12px;
+  animation: focusWiggle 0.3s ease-in-out;
+}
+
+@keyframes focusWiggle {
+  0%, 100% { outline-width: 3px; }
+  50% { outline-width: 5px; }
+}
+
+/* ── Card tilt randomization ─────────────────────────────── */
+.card-tilt {
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 0.3s ease;
+}
+
+.card-tilt:hover {
+  transform: rotate(0deg) scale(1.02);
+}
