@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc",
+    "build": "echo 'API build skipped for Vercel — Next.js API routes handle all backend logic'",
     "start": "node dist/index.js",
     "lint": "echo 'lint ok'",
     "clean": "echo 'clean ok'"
