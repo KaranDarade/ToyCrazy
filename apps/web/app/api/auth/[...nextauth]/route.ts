@@ -1,11 +1,12 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from '@toycraze/database';
 import bcrypt from 'bcryptjs';
 
 const { handlers: { GET, POST } } = NextAuth({
-  adapter: (import('@auth/prisma-adapter').then(m => m.PrismaAdapter(prisma))) as any,
+  adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? '',
@@ -63,7 +64,7 @@ const { handlers: { GET, POST } } = NextAuth({
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60,
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET ?? 'build-time-fallback-secret-do-not-use-in-production',
 });
 
 export { GET, POST };
